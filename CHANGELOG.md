@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/GrabAByte/terraform-module-aws-s3/compare/v1.0.2...v1.1.0) (2025-05-30)
+
+
+### Features
+
+* add docs ([e3a63b1](https://github.com/GrabAByte/terraform-module-aws-s3/commit/e3a63b1c6464e4b3dffa48dd1fe481a8880b6761))
+* add docs ([007b768](https://github.com/GrabAByte/terraform-module-aws-s3/commit/007b768a53d7db6446d8423f33da4540650257cf))
+
 ## [1.0.2](https://github.com/GrabAByte/terraform-module-aws-s3/compare/v1.0.1...v1.0.2) (2025-05-30)
 
 
