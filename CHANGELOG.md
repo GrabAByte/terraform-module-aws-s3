@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/GrabAByte/terraform-module-aws-s3/compare/v1.0.0...v1.0.1) (2025-05-30)
+
+
+### Bug Fixes
+
+* remove hashicorp/archive provider ([8c63e16](https://github.com/GrabAByte/terraform-module-aws-s3/commit/8c63e1692b1bc2b8c57cc33b6346d2af8c4820b2))
+
 # 1.0.0 (2025-05-30)
 
 
