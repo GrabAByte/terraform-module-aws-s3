@@ -1,3 +1,13 @@
+## [1.0.2](https://github.com/GrabAByte/terraform-module-aws-s3/compare/v1.0.1...v1.0.2) (2025-05-30)
+
+
+### Bug Fixes
+
+* make defaults generic ([95d3bc2](https://github.com/GrabAByte/terraform-module-aws-s3/commit/95d3bc21bd298bce3fffb0cfd8c54a64e0e1050a))
+* make defaults generic ([d40187b](https://github.com/GrabAByte/terraform-module-aws-s3/commit/d40187bd0353d62dc04968804436f89561c8366e))
+* make defaults generic ([4d5ae85](https://github.com/GrabAByte/terraform-module-aws-s3/commit/4d5ae8540e69972d32435b6427966c2d0f0e6a6d))
+* set module defaults for re-use [#2](https://github.com/GrabAByte/terraform-module-aws-s3/issues/2) ([7695185](https://github.com/GrabAByte/terraform-module-aws-s3/commit/7695185be7949e37ca77f90807e3d976a330a732))
+
 ## [1.0.1](https://github.com/GrabAByte/terraform-module-aws-s3/compare/v1.0.0...v1.0.1) (2025-05-30)
 
 
