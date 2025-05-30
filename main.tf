@@ -108,8 +108,7 @@ resource "aws_kms_key" "key" {
   description             = "KMS Key for SSE-KMS"
   enable_key_rotation     = var.kms_enable_rotation
   deletion_window_in_days = var.kms_deletion_window_days
-
-  tags = var.tags
+  tags                    = var.tags
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt" {
