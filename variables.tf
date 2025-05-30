@@ -42,7 +42,7 @@ variable "kms_sse_algorithm" {
 variable "log_bucket_name" {
   type        = string
   description = "The bucket log events within"
-  default     = "convertr-log-bucket"
+  default     = "log-bucket"
 }
 
 variable "tags" {
