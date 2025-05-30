@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "image_bucket" {
+resource "aws_s3_bucket" "bucket" {
   bucket        = var.bucket_name
   force_destroy = false
   tags          = var.tags
@@ -10,7 +10,7 @@ resource "aws_s3_bucket" "log_bucket" {
   tags          = var.tags
 }
 
-resource "aws_s3_bucket_ownership_controls" "image_bucket" {
+resource "aws_s3_bucket_ownership_controls" "bucket" {
   bucket = aws_s3_bucket.image_bucket.id
   rule {
     object_ownership = "BucketOwnerPreferred"
