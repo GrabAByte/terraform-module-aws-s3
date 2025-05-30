@@ -11,7 +11,7 @@ resource "aws_s3_bucket" "log_bucket" {
 }
 
 resource "aws_s3_bucket_ownership_controls" "bucket" {
-  bucket = aws_s3_bucket.image_bucket.id
+  bucket = aws_s3_bucket.bucket.id
   rule {
     object_ownership = "BucketOwnerPreferred"
   }
@@ -26,7 +26,7 @@ resource "aws_s3_bucket_ownership_controls" "log_bucket" {
 
 # monitoring
 resource "aws_s3_bucket_logging" "logging" {
-  bucket = aws_s3_bucket.image_bucket.id
+  bucket = aws_s3_bucket.bucket.id
 
   target_bucket = aws_s3_bucket.log_bucket.id
   target_prefix = "/"
@@ -34,7 +34,7 @@ resource "aws_s3_bucket_logging" "logging" {
 
 # retention
 resource "aws_s3_bucket_versioning" "versioning" {
-  bucket = aws_s3_bucket.image_bucket.id
+  bucket = aws_s3_bucket.bucket.id
   versioning_configuration {
     status = "Enabled"
   }
@@ -42,7 +42,7 @@ resource "aws_s3_bucket_versioning" "versioning" {
 
 # housekeeping
 resource "aws_s3_bucket_lifecycle_configuration" "lifecycle" {
-  bucket = aws_s3_bucket.image_bucket.id
+  bucket = aws_s3_bucket.bucket.id
 
   rule {
     id     = "delete_old_versions"
@@ -113,7 +113,7 @@ resource "aws_kms_key" "key" {
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt" {
-  bucket = aws_s3_bucket.image_bucket.id
+  bucket = aws_s3_bucket.bucket.id
 
   rule {
     apply_server_side_encryption_by_default {
@@ -136,7 +136,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt_logs" {
 
 # network access
 resource "aws_s3_bucket_public_access_block" "block_public" {
-  bucket = aws_s3_bucket.image_bucket.id
+  bucket = aws_s3_bucket.bucket.id
 
   block_public_acls       = true
   block_public_policy     = true
@@ -155,7 +155,7 @@ resource "aws_s3_bucket_public_access_block" "block_public_logs" {
 
 # encrypted traffic
 resource "aws_s3_bucket_policy" "https_only" {
-  bucket = aws_s3_bucket.image_bucket.id
+  bucket = aws_s3_bucket.bucket.id
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -166,8 +166,8 @@ resource "aws_s3_bucket_policy" "https_only" {
         Principal = "*"
         Action    = "s3:*"
         Resource = [
-          "${aws_s3_bucket.image_bucket.arn}/*",
-          aws_s3_bucket.image_bucket.arn
+          "${aws_s3_bucket.bucket.arn}/*",
+          aws_s3_bucket.bucket.arn
         ]
         Condition = {
           Bool = {
