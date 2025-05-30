@@ -1,5 +1,3 @@
-data "aws_caller_identity" "current" {}
-
 resource "aws_s3_bucket" "image_bucket" {
   bucket        = var.bucket_name
   force_destroy = false
