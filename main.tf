@@ -4,34 +4,6 @@ resource "aws_s3_bucket" "bucket" {
   tags          = var.tags
 }
 
-resource "aws_s3_bucket" "log_bucket" {
-  bucket        = var.log_bucket_name
-  force_destroy = false
-  tags          = var.tags
-}
-
-resource "aws_s3_bucket_ownership_controls" "bucket" {
-  bucket = aws_s3_bucket.bucket.id
-  rule {
-    object_ownership = "BucketOwnerPreferred"
-  }
-}
-
-resource "aws_s3_bucket_ownership_controls" "log_bucket" {
-  bucket = aws_s3_bucket.log_bucket.id
-  rule {
-    object_ownership = "BucketOwnerPreferred"
-  }
-}
-
-# monitoring
-resource "aws_s3_bucket_logging" "logging" {
-  bucket = aws_s3_bucket.bucket.id
-
-  target_bucket = aws_s3_bucket.log_bucket.id
-  target_prefix = "/"
-}
-
 # retention
 resource "aws_s3_bucket_versioning" "versioning" {
   bucket = aws_s3_bucket.bucket.id
