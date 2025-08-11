@@ -114,15 +114,6 @@ resource "aws_s3_bucket_public_access_block" "block_public" {
   restrict_public_buckets = true
 }
 
-resource "aws_s3_bucket_public_access_block" "block_public_logs" {
-  bucket = aws_s3_bucket.log_bucket.id
-
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
-}
-
 # encrypted traffic
 resource "aws_s3_bucket_policy" "https_only" {
   bucket = aws_s3_bucket.bucket.id

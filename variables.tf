@@ -39,12 +39,6 @@ variable "bucket_version_expiry" {
 #   default     = "aws:kms"
 # }
 
-variable "log_bucket_name" {
-  type        = string
-  description = "The bucket log events within"
-  default     = "log-bucket"
-}
-
 variable "tags" {
   type        = map(any)
   description = "The project tags"
