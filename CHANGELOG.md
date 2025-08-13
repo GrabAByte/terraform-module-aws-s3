@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/GrabAByte/terraform-module-aws-s3/compare/v1.2.0...v1.3.0) (2025-08-13)
+
+
+### Features
+
+* add KMS encryption back in with feature flag ([#5](https://github.com/GrabAByte/terraform-module-aws-s3/issues/5)) ([e26576b](https://github.com/GrabAByte/terraform-module-aws-s3/commit/e26576ba9c4ce099cc660fb6d8acf0360b314888))
+
 # [1.2.0](https://github.com/GrabAByte/terraform-module-aws-s3/compare/v1.1.0...v1.2.0) (2025-08-08)
 
 
