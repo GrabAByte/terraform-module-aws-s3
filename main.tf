@@ -96,7 +96,7 @@ resource "aws_kms_key_policy" "key_policy" {
         Action = [
           "kms:*",
         ]
-        Resource = "kms:*"
+        Resource = "*"
       }
     ]
     Version = "2012-10-17"
