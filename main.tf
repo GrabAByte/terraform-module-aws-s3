@@ -83,7 +83,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "lifecycle" {
 
 resource "aws_kms_key_policy" "key_policy" {
   count  = var.enable_encryption ? 1 : 0
-  key_id = aws_kms_key.key.id
+  key_id = aws_kms_key.key[count.index].id
   policy = jsonencode({
     Id = "key"
     Statement = [
@@ -117,7 +117,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt" {
 
   rule {
     apply_server_side_encryption_by_default {
-      kms_master_key_id = aws_kms_key.key.arn
+      kms_master_key_id = aws_kms_key.key[count.index].arn
       sse_algorithm     = var.kms_sse_algorithm
     }
   }
@@ -129,7 +129,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt_logs" {
 
   rule {
     apply_server_side_encryption_by_default {
-      kms_master_key_id = aws_kms_key.key.arn
+      kms_master_key_id = aws_kms_key.key[count.index].arn
       sse_algorithm     = var.kms_sse_algorithm
     }
   }
