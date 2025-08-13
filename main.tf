@@ -81,56 +81,59 @@ resource "aws_s3_bucket_lifecycle_configuration" "lifecycle" {
   }
 }
 
-# encryption: disabling as expensive
-# resource "aws_kms_key_policy" "key_policy" {
-#  key_id = aws_kms_key.key.id
-#  policy = jsonencode({
-#    Id = "key"
-#    Statement = [
-#      {
-#        Sid    = "Allow administration of the key"
-#        Effect = "Allow"
-#        Principal = {
-#          AWS = "*"
-#        }
-#        Action = [
-#          "kms:*",
-#        ]
-#        Resource = "*"
-#      }
-#    ]
-#    Version = "2012-10-17"
-#  })
-#}
+resource "aws_kms_key_policy" "key_policy" {
+  count  = var.enable_encryption ? 1 : 0
+  key_id = aws_kms_key.key.id
+  policy = jsonencode({
+    Id = "key"
+    Statement = [
+      {
+        Sid    = "Allow administration of the key"
+        Effect = "Allow"
+        Principal = {
+          AWS = "*"
+        }
+        Action = [
+          "kms:*",
+        ]
+        Resource = "kms:*"
+      }
+    ]
+    Version = "2012-10-17"
+  })
+}
 
-#resource "aws_kms_key" "key" {
-#  description             = "KMS Key for SSE-KMS"
-#  enable_key_rotation     = var.kms_enable_rotation
-#  deletion_window_in_days = var.kms_deletion_window_days
-#  tags                    = var.tags
-#}
+resource "aws_kms_key" "key" {
+  count                   = var.enable_encryption ? 1 : 0
+  description             = "KMS Key for SSE-KMS"
+  enable_key_rotation     = var.kms_enable_rotation
+  deletion_window_in_days = var.kms_deletion_window_days
+  tags                    = var.tags
+}
 
-#resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt" {
-#  bucket = aws_s3_bucket.bucket.id
+resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt" {
+  count  = var.enable_encryption ? 1 : 0
+  bucket = aws_s3_bucket.bucket.id
 
-#  rule {
-#    apply_server_side_encryption_by_default {
-#      kms_master_key_id = aws_kms_key.key.arn
-#      sse_algorithm     = var.kms_sse_algorithm
-#    }
-#  }
-#}
+  rule {
+    apply_server_side_encryption_by_default {
+      kms_master_key_id = aws_kms_key.key.arn
+      sse_algorithm     = var.kms_sse_algorithm
+    }
+  }
+}
 
-#resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt_logs" {
-#  bucket = aws_s3_bucket.log_bucket.id
+resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt_logs" {
+  count  = var.enable_encryption ? 1 : 0
+  bucket = aws_s3_bucket.log_bucket.id
 
-#  rule {
-#    apply_server_side_encryption_by_default {
-#      kms_master_key_id = aws_kms_key.key.arn
-#      sse_algorithm     = var.kms_sse_algorithm
-#    }
-#  }
-#}
+  rule {
+    apply_server_side_encryption_by_default {
+      kms_master_key_id = aws_kms_key.key.arn
+      sse_algorithm     = var.kms_sse_algorithm
+    }
+  }
+}
 
 # network access
 resource "aws_s3_bucket_public_access_block" "block_public" {

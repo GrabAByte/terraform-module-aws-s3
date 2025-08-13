@@ -21,23 +21,29 @@ variable "bucket_version_expiry" {
   default     = 90
 }
 
-# variable "kms_enable_rotation" {
-#   type        = bool
-#   description = "whether to expire delete markers"
-#   default     = true
-# }
+variable "enable_encryption" {
+  type        = bool
+  description = "whether to expire delete markers"
+  default     = false
+}
 
-# variable "kms_deletion_window_days" {
-#   type        = number
-#   description = "number of days until deletion of KMS key"
-#   default     = 20
-# }
+variable "kms_enable_rotation" {
+  type        = bool
+  description = "whether to expire delete markers"
+  default     = true
+}
 
-# variable "kms_sse_algorithm" {
-#   type        = string
-#   description = "the algorithm to encrpyt with"
-#   default     = "aws:kms"
-# }
+variable "kms_deletion_window_days" {
+  type        = number
+  description = "number of days until deletion of KMS key"
+  default     = 20
+}
+
+variable "kms_sse_algorithm" {
+  type        = string
+  description = "the algorithm to encrpyt with"
+  default     = "aws:kms"
+}
 
 variable "log_bucket_name" {
   type        = string
